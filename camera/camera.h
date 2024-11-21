@@ -10,12 +10,13 @@
 
 class Camera {
 public:
-    Camera(float viewport_height, float focal_length);
-    color ray_color(const Ray<float, 3u>& r);
+    Camera(int image_width,float viewport_height, float focal_length);
+    color ray_color(Ray<float, 3u> &r);
 
 public:
     float viewport_height;
     float viewport_width;
+    int image_width{};
     int image_height{};
     float focal_length{};
     Vector3df camera_center{};

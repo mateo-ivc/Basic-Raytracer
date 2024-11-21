@@ -99,8 +99,6 @@ bool Sphere<FLOAT, N>::inside(const Vector<FLOAT, N> p) const {
 }
 
 
-
-
 // solution via
 // (g(t) - center )^2  = ( (ray.origin - center) + t ray.direction)^2 = r^2 
 // and abc-formula

@@ -1,6 +1,6 @@
-/home/mateo/CLionProjects/raytracer/cmake-build-debug/CMakeFiles/raytracer.dir
-/home/mateo/CLionProjects/raytracer/cmake-build-debug/CMakeFiles/math_test.dir
-/home/mateo/CLionProjects/raytracer/cmake-build-debug/CMakeFiles/geometry_test.dir
-/home/mateo/CLionProjects/raytracer/cmake-build-debug/CMakeFiles/test.dir
-/home/mateo/CLionProjects/raytracer/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/mateo/CLionProjects/raytracer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/mateo/CLionProjects/Basic-Raytracer/cmake-build-debug/CMakeFiles/raytracer.dir
+/home/mateo/CLionProjects/Basic-Raytracer/cmake-build-debug/CMakeFiles/math_test.dir
+/home/mateo/CLionProjects/Basic-Raytracer/cmake-build-debug/CMakeFiles/geometry_test.dir
+/home/mateo/CLionProjects/Basic-Raytracer/cmake-build-debug/CMakeFiles/test.dir
+/home/mateo/CLionProjects/Basic-Raytracer/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/mateo/CLionProjects/Basic-Raytracer/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -64,9 +64,7 @@
 int main() {
     // Image
 
-    int image_width = 256;
-    int image_height = 256;
-    Camera camera = Camera(2.0, 1.0);
+    Camera camera = Camera(800, 2.0f, 1.0f);
     Vector3df viewport_upper_left = camera.camera_center - Vector3df{0.0, 0.0, camera.focal_length} - camera.viewport_u /
                                     2.0f - camera.viewport_v / 2.0f;
     Vector3df pixel00_loc = viewport_upper_left + 0.5f * (camera.pixel_delta_u+camera.pixel_delta_v);
@@ -74,13 +72,14 @@ int main() {
 
     // Render
 
-    std::cout << "P3\n" << image_width << " " << image_height << "\n255\n";
+    std::cout << "P3\n" << camera.image_width << " " << camera.image_height << "\n255\n";
 
-    for (int j = 0; j < image_height; j++) {
-        std::clog << "\rScanlines remaining: " << (image_height - j) << ' ' << std::flush;
-        for (int i = 0; i < image_width; i++) {
+    for (int j = 0; j < camera.image_height; j++) {
+        std::clog << "\rScanlines remaining: " << (camera.image_height - j) << ' ' << std::flush;
+        for (int i = 0; i < camera.image_width; i++) {
             auto pixel_center = pixel00_loc + (float(i) * camera.pixel_delta_u) + (float(j) * camera.pixel_delta_v);
             auto ray_direction = pixel_center - camera.camera_center;
+
             Ray r(camera.camera_center, ray_direction);
 
             color pixel_color = camera.ray_color(r);
