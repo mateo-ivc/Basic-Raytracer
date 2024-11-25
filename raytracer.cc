@@ -68,10 +68,7 @@ int main() {
     Vector3df viewport_upper_left = camera.camera_center - Vector3df{0.0, 0.0, camera.focal_length} - camera.viewport_u /
                                     2.0f - camera.viewport_v / 2.0f;
     Vector3df pixel00_loc = viewport_upper_left + 0.5f * (camera.pixel_delta_u+camera.pixel_delta_v);
-
-
     // Render
-
     std::cout << "P3\n" << camera.image_width << " " << camera.image_height << "\n255\n";
 
     for (int j = 0; j < camera.image_height; j++) {
@@ -82,7 +79,7 @@ int main() {
 
             Ray r(camera.camera_center, ray_direction);
 
-            color pixel_color = camera.ray_color(r);
+            color pixel_color = Camera::ray_color(r);
             write_color(std::cout, pixel_color);
         }
     }

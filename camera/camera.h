@@ -11,7 +11,7 @@
 class Camera {
 public:
     Camera(int image_width,float viewport_height, float focal_length);
-    color ray_color(Ray<float, 3u> &r);
+    static color ray_color(Ray<float, 3u> &r);
 
 public:
     float viewport_height;
