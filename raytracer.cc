@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include "camera/camera.h"
+#include "utils/color/color.h"
 
 
 // Die folgenden Kommentare beschreiben Datenstrukturen und Funktionen

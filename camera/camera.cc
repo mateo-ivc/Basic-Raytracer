@@ -28,6 +28,8 @@ Camera::Camera(int image_width,float viewport_height, float focal_length) {
 
 
 color Camera::ray_color(Ray<float, 3> &r) {
+
+
     r.direction.normalize();
     float a = 0.5f * (r.direction[2] + 1.0f);
     return (1.0f - a) * color{1.0, 1.0, 1.0} + a * color{0.5, 0.7, 1.0};
