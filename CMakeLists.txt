@@ -13,16 +13,18 @@ add_executable(raytracer raytracer.cc
         geometry/geometry.cc
         camera/camera.cc
         utils/color/color.h
-        utils/color/color.cc)
+        utils/color/color.cc
+        scene/scene.cc
+        scene/scene.h
+        scene/Light/light.cc
+        scene/Light/light.h
+        screen/screen.cc
+        screen/screen.h)
 
 enable_testing()
 add_executable(math_test utils/math/math_test.cc utils/math/math.cc)
 target_link_libraries(math_test gtest gtest_main)
 
-add_executable(geometry_test geometry/geometry_test.cc geometry/geometry.cc utils/math/math.cc
-        Scene/Scene.cc
-        Scene/Scene.h
-        Scene/Light/Light.cc
-        Scene/Light/Light.h)
+add_executable(geometry_test geometry/geometry_test.cc geometry/geometry.cc utils/math/math.cc)
 target_link_libraries(geometry_test gtest gtest_main)
 

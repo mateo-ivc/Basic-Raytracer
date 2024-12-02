@@ -3,9 +3,13 @@
 #include <vector>
 #include <algorithm>
 #include "camera/camera.h"
+#include "scene/scene.h"
+#include "screen/screen.h"
 #include "utils/color/color.h"
 
 
+static int width = 256;
+static int height = 256;
 // Die folgenden Kommentare beschreiben Datenstrukturen und Funktionen
 // Die Datenstrukturen und Funktionen die weiter hinten im Text beschrieben sind,
 // hängen höchstens von den vorhergehenden Datenstrukturen ab, aber nicht umgekehrt.
@@ -62,28 +66,18 @@
 
 // Die rekursive raytracing-Methode. Am besten ab einer bestimmten Rekursionstiefe (z.B. als Parameter übergeben) abbrechen.
 
+
+void raytrace(Camera camera, const Scene& scene, Screen screen) {
+
+}
+
 int main() {
-    // Image
+    Scene scene;
+    scene.addLight(Light(Vector3df{500.0, 500.0, 1000.0}, Color{1.0, 1.0, 1.0}));
 
-    Camera camera = Camera(800, 2.0f, 1.0f);
-    Vector3df viewport_upper_left = camera.camera_center - Vector3df{0.0, 0.0, camera.focal_length} - camera.viewport_u /
-                                    2.0f - camera.viewport_v / 2.0f;
-    Vector3df pixel00_loc = viewport_upper_left + 0.5f * (camera.pixel_delta_u+camera.pixel_delta_v);
-    // Render
-    std::cout << "P3\n" << camera.image_width << " " << camera.image_height << "\n255\n";
+    Screen screen(width, height);
 
-    for (int j = 0; j < camera.image_height; j++) {
-        std::clog << "\rScanlines remaining: " << (camera.image_height - j) << ' ' << std::flush;
-        for (int i = 0; i < camera.image_width; i++) {
-            auto pixel_center = pixel00_loc + (float(i) * camera.pixel_delta_u) + (float(j) * camera.pixel_delta_v);
-            auto ray_direction = pixel_center - camera.camera_center;
+    const Camera camera(Vector3df{0.05, 1.0, 200.0}, Vector3df{0.05, 1.0, 100.0}, screen);
 
-            Ray r(camera.camera_center, ray_direction);
-
-            color pixel_color = Camera::ray_color(r);
-            write_color(std::cout, pixel_color);
-        }
-    }
-
-    std::clog << "\rDone.                 \n";
+    raytrace(camera, scene, std::move(screen));
 }
