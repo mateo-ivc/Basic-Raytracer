@@ -19,7 +19,9 @@ add_executable(raytracer raytracer.cc
         scene/Light/light.cc
         scene/Light/light.h
         screen/screen.cc
-        screen/screen.h)
+        screen/screen.h
+        utils/material/material.cc
+        utils/material/material.h)
 
 enable_testing()
 add_executable(math_test utils/math/math_test.cc utils/math/math.cc)

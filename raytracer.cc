@@ -67,17 +67,48 @@ static int height = 256;
 // Die rekursive raytracing-Methode. Am besten ab einer bestimmten Rekursionstiefe (z.B. als Parameter übergeben) abbrechen.
 
 
-void raytrace(Camera camera, const Scene& scene, Screen screen) {
+void raytrace(Camera *camera, const Scene *scene, Screen *screen) {
+    screen->clear();
+    //Todo: implement material
+    Color color;
+    for (size_t x = 0.0; x < screen->getWidth(); x++) {
+        for (size_t y = 0; y < screen->getHeight(); y++) {
+            color = Color(0, 0, 0);
+            const Ray ray = camera->getRay(x, y);
+            //todo: somehow calculate pixel
+            /* START: code that calculates the color of a pixel*/
 
+            /* END: code that calculates the color of a pixel*/
+            screen->setPixel(x, y, color);
+        }
+    }
+}
+
+std::ostream & operator<<(std::ostream & out, const Screen & screen) {
+    out << "P3" << std::endl;
+    out << screen.getWidth() << " " << screen.getHeight() << std::endl;
+    out << "255" << std::endl;
+    for (size_t y = 0u; y < screen.getHeight(); y++) {
+        for (size_t x = 0u; x < screen.getWidth(); x++) {
+            std::cout << (unsigned short) (screen.getPixel(x,y).getRed() * 255.0) << " "
+                      << (unsigned short) (screen.getPixel(x,y).getGreen() * 255.0) << " "
+                      << (unsigned short) (screen.getPixel(x,y).getBlue() * 255.0) << " ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+    return out;
 }
 
 int main() {
     Scene scene;
     scene.addLight(Light(Vector3df{500.0, 500.0, 1000.0}, Color{1.0, 1.0, 1.0}));
-
+    scene.addObject(Sphere3df({10.0, 10.0, 10.0}, 2));
     Screen screen(width, height);
 
-    const Camera camera(Vector3df{0.05, 1.0, 200.0}, Vector3df{0.05, 1.0, 100.0}, screen);
+    Camera camera(Vector3df{0.05, 1.0, 200.0}, Vector3df{0.05, 1.0, 100.0}, Vector3df{  0.0, 1.6, 0.0} , screen);
 
-    raytrace(camera, scene, std::move(screen));
+    raytrace(&camera, &scene, &screen);
+
+    std::cout << screen;
 }
