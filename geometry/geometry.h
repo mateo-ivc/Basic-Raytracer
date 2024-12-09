@@ -76,10 +76,10 @@ public:
 // a sphere with a center and a radius
 template <class FLOAT, size_t N>
 class Sphere {
-protected:
+public:
   Vector<FLOAT,N> center;
   FLOAT radius;
-public:
+
   Sphere(Vector<FLOAT,N> center, FLOAT radius);
   
   // returns true iff the given ray intersects this sphere

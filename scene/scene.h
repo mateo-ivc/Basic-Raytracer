@@ -9,18 +9,21 @@
 #include <memory>
 #include "camera/camera.h"
 #include "scene/Light/light.h"
+#include "utils/hittable/hittable.h"
 
 class Scene {
-    std::vector<Sphere<float, 3>> spheres;
-    std::vector<Light> lights;
-
 public:
 
-    void addObject(Sphere<float, 3> object);
+
+    std::vector<Hittable> objects;
+    std::vector<Light> lights;
+    Scene();
+
+    void addObject(Hittable object);
+
     void addLight(const Light &light);
 
-
-
+    std::shared_ptr<HitContext> find_nearest_object(Ray3df ray, float t_min = 0.0f, float t_max = INFINITY);
 };
 
 

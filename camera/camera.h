@@ -8,6 +8,7 @@
 #include <geometry/geometry.h>
 #include <utils/math/math.h>
 
+#include "scene/scene.h"
 #include "screen/screen.h"
 #include "utils/color/color.h"
 
@@ -22,10 +23,9 @@ public:
     const Screen *screen{};
 
 
-
     Ray<float, 3> getRay(size_t x, size_t y) const;
 
-
+    Color trace(Scene *scene, Ray<float, 3> ray, int depth) ;
 };
 
 #endif // CAMERA_H

@@ -21,7 +21,9 @@ add_executable(raytracer raytracer.cc
         screen/screen.cc
         screen/screen.h
         utils/material/material.cc
-        utils/material/material.h)
+        utils/material/material.h
+        utils/hittable/hittable.cc
+        utils/hittable/hittable.h)
 
 enable_testing()
 add_executable(math_test utils/math/math_test.cc utils/math/math.cc)

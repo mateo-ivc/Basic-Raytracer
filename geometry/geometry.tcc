@@ -102,7 +102,7 @@ bool Sphere<FLOAT, N>::inside(const Vector<FLOAT, N> p) const {
 // solution via
 // (g(t) - center )^2  = ( (ray.origin - center) + t ray.direction)^2 = r^2 
 // and abc-formula
-/*
+
 template <class FLOAT, size_t N>
 FLOAT Sphere<FLOAT,N>::intersects(const Ray<FLOAT, N> &ray) const {
   Vector<FLOAT,N> om = ray.origin - center;
@@ -119,7 +119,7 @@ FLOAT Sphere<FLOAT,N>::intersects(const Ray<FLOAT, N> &ray) const {
   }
   return 0.5 * std::min( std::max<FLOAT>(0.0, (-b + d)) , (-b - d) ) / a; 
 }
-
+/*
 template <class FLOAT, size_t N>
 bool Sphere<FLOAT,N>::intersects(const Ray<FLOAT, N> &ray, Intersection_Context<FLOAT, N> & context) const {
   FLOAT t = intersects(ray);
