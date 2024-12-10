@@ -14,18 +14,34 @@
 
 class Camera {
 public:
-    Camera(Vector3df position, Vector3df direction, Vector3df up_vector, const Screen &screen);
+    Screen &screen;
 
-    Vector3df position, direction, up_vector, right_vector{};
+    float focal_length;
+    float viewport_height;
+    float viewport_width;
+    Vector3df camera_center;
 
-    float fov{};
+    Vector3df viewport_u;
+    Vector3df viewport_v;
 
-    const Screen *screen{};
+    Vector3df pixel_delta_u;
+    Vector3df pixel_delta_v;
+
+    Vector3df viewport_upper_left;
+    Vector3df pixel00_loc;
+
+    Camera(Screen &screen, float focal_length, float viewport_height, int image_height, int image_width, Vector3df &camera_center);
 
 
-    Ray<float, 3> getRay(size_t x, size_t y) const;
+
+    float fov = 1;
+
+
+
+    Ray3df getRay(size_t x, size_t y) const;
 
     Color trace(Scene *scene, Ray<float, 3> ray, int depth) ;
+    float calc_lambertian(int n, std::vector<Light> *lights, HitContext *hit_context);
 };
 
 #endif // CAMERA_H

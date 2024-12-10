@@ -10,6 +10,7 @@ include_directories(${CMAKE_SOURCE_DIR})
 
 add_executable(raytracer raytracer.cc
         utils/math/math.cc
+        utils/math/math.h
         geometry/geometry.cc
         camera/camera.cc
         utils/color/color.h

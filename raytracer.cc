@@ -8,8 +8,7 @@
 #include "utils/color/color.h"
 
 
-static int width = 256;
-static int height = 256;
+static int width = 800;
 // Die folgenden Kommentare beschreiben Datenstrukturen und Funktionen
 // Die Datenstrukturen und Funktionen die weiter hinten im Text beschrieben sind,
 // hängen höchstens von den vorhergehenden Datenstrukturen ab, aber nicht umgekehrt.
@@ -69,14 +68,11 @@ static int height = 256;
 
 void raytrace(Camera *camera, Scene *scene, Screen *screen) {
     screen->clear();
-    //Todo: implement material
-    Color color;
     for (size_t x = 0.0; x < screen->getWidth(); x++) {
         for (size_t y = 0; y < screen->getHeight(); y++) {
-            const Ray ray = camera->getRay(x, y);
-            //todo: somehow calculate pixel
+            const Ray<float, 3> ray = camera->getRay(x, y);
             /* START: code that calculates the color of a pixel*/
-            Color color = camera->trace(scene, ray, 3);
+            Color color = camera->trace(scene, ray, 20);
             /* END: code that calculates the color of a pixel*/
             screen->setPixel(x, y, color);
         }
@@ -89,9 +85,9 @@ std::ostream &operator<<(std::ostream &out, const Screen &screen) {
     out << "255" << std::endl;
     for (size_t y = 0u; y < screen.getHeight(); y++) {
         for (size_t x = 0u; x < screen.getWidth(); x++) {
-            std::cout << (unsigned short) (screen.getPixel(x, y).getRed() * 255.0) << " "
-                    << (unsigned short) (screen.getPixel(x, y).getGreen() * 255.0) << " "
-                    << (unsigned short) (screen.getPixel(x, y).getBlue() * 255.0) << " ";
+            std::cout << (unsigned short) (screen.getPixel(x, y).getRed() * 255) << " "
+                      << (unsigned short) (screen.getPixel(x, y).getGreen() * 255) << " "
+                      << (unsigned short) (screen.getPixel(x, y).getBlue() * 255) << " ";
         }
         std::cout << std::endl;
     }
@@ -100,16 +96,23 @@ std::ostream &operator<<(std::ostream &out, const Screen &screen) {
 }
 
 int main() {
-    Scene &scene;
-    scene.find_nearest_object(Ray3df{{1, 2, 3}, {2, 3, 4}}, 1, 1);
-    scene.addLight(Light(Vector3df{500.0, 500.0, 1000.0}, Color{1.0, 1.0, 1.0}));
-    //todo: create init function for scene
-    Material white_material = {{1.0f, 1.0f, 1.0f}, 1.0f, 0.4f, 0.0f, 0.0f};
-    Sphere3df sphere = {{10.0, 10.0, 10.0}, 2};
-    scene.addObject(Hittable(white_material, sphere));
-    Screen screen(width, height);
+    Scene scene;
+    scene.initialize();
 
-    Camera camera(Vector3df{0.05, 1.0, 200.0}, Vector3df{0.05, 1.0, 100.0}, Vector3df{0.0, 1.6, 0.0}, screen);
+    //todo: create init function for scene
+
+    float aspect_ration = 4.0 / 3.0;
+
+    int height = static_cast<int>(width / aspect_ration);
+    height = (height < 1) ? 1 : height;
+
+
+    // Kamera erstellen
+    float focal_length = 2.0;
+    float viewport_height = 2.0;
+    Vector3df camera_center = {0.0f, 1.0f, 8.0f};
+    Screen screen(width, height);
+    Camera camera(screen, focal_length, viewport_height, height, width, camera_center);
     raytrace(&camera, &scene, &screen);
 
     std::cout << screen;

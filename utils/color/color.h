@@ -13,11 +13,13 @@ public:
     float getGreen() const;
     float getBlue() const;
 
+
+
     Color operator+(Color addend) const;
     Color operator*(Color factor) const;
 
     friend Color operator*(float factor, Color color);
 
+
 };
-void write_color(std::ostream &out, const Color &pixel_color);
 #endif // COLOR_H
